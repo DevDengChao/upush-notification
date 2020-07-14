@@ -42,6 +42,11 @@ public abstract class UmengNotification {
      */
     protected String appMasterSecret;
 
+    {
+        // fill required field with default value
+        setPredefinedKeyValue("timestamp", System.currentTimeMillis());
+    }
+
     /**
      * Set predefined keys in the rootJson, for extra keys(Android) or customized keys(IOS) please
      * refer to corresponding methods in the subclass.
