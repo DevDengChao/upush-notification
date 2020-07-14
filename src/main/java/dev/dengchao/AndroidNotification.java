@@ -25,7 +25,7 @@ public abstract class AndroidNotification extends UmengNotification {
      * BODY_KEYS and POLICY_KEYS.
      */
     @Override
-    public boolean setPredefinedKeyValue(@NotNull String key, @NotNull Object value) throws Exception {
+    public boolean setPredefinedKeyValue(@NotNull String key, @NotNull Object value) {
         if (ROOT_KEYS.contains(key)) {
             // This key should be in the root level
             rootJson.put(key, value);
@@ -70,9 +70,9 @@ public abstract class AndroidNotification extends UmengNotification {
             policyJson.put(key, value);
         } else {
             if (key.equals("payload") || key.equals("body") || key.equals("policy") || key.equals("extra")) {
-                throw new Exception("You don't need to set value for " + key + " , just set values for the sub keys in it.");
+                throw new RuntimeException("You don't need to set value for " + key + " , just set values for the sub keys in it.");
             } else {
-                throw new Exception("Unknown key: " + key);
+                throw new RuntimeException("Unknown key: " + key);
             }
         }
         return true;
@@ -102,91 +102,91 @@ public abstract class AndroidNotification extends UmengNotification {
     }
 
     //
-    public void setDisplayType(DisplayType d) throws Exception {
+    public void setDisplayType(DisplayType d) {
         setPredefinedKeyValue("display_type", d.getValue());
     }
 
     /**
      * 通知栏提示文字
      */
-    public void setTicker(@NotNull String ticker) throws Exception {
+    public void setTicker(@NotNull String ticker) {
         setPredefinedKeyValue("ticker", ticker);
     }
 
     /**
      * 通知标题
      */
-    public void setTitle(@NotNull String title) throws Exception {
+    public void setTitle(@NotNull String title) {
         setPredefinedKeyValue("title", title);
     }
 
     /**
      * 通知文字描述
      */
-    public void setText(@NotNull String text) throws Exception {
+    public void setText(@NotNull String text) {
         setPredefinedKeyValue("text", text);
     }
 
     /**
      * 用于标识该通知采用的样式。使用该参数时, 必须在SDK里面实现自定义通知栏样式。
      */
-    public void setBuilderId(Integer builder_id) throws Exception {
+    public void setBuilderId(Integer builder_id) {
         setPredefinedKeyValue("builder_id", builder_id);
     }
 
     /**
      * 状态栏图标ID, R.drawable.[smallIcon],如果没有, 默认使用应用图标。
      */
-    public void setIcon(@NotNull String icon) throws Exception {
+    public void setIcon(@NotNull String icon) {
         setPredefinedKeyValue("icon", icon);
     }
 
     /**
      * 通知栏拉开后左侧图标ID
      */
-    public void setLargeIcon(@NotNull String largeIcon) throws Exception {
+    public void setLargeIcon(@NotNull String largeIcon) {
         setPredefinedKeyValue("largeIcon", largeIcon);
     }
 
     /**
      * 通知栏大图标的URL链接。该字段的优先级大于largeIcon。该字段要求以http或者https开头。
      */
-    public void setImg(@NotNull String img) throws Exception {
+    public void setImg(@NotNull String img) {
         setPredefinedKeyValue("img", img);
     }
 
     /**
      * 收到通知是否震动,默认为"true"
      */
-    public void setPlayVibrate(Boolean play_vibrate) throws Exception {
+    public void setPlayVibrate(Boolean play_vibrate) {
         setPredefinedKeyValue("play_vibrate", play_vibrate.toString());
     }
 
     /**
      * 收到通知是否闪灯,默认为"true"
      */
-    public void setPlayLights(Boolean play_lights) throws Exception {
+    public void setPlayLights(Boolean play_lights) {
         setPredefinedKeyValue("play_lights", play_lights.toString());
     }
 
     /**
      * 收到通知是否发出声音,默认为"true"
      */
-    public void setPlaySound(Boolean play_sound) throws Exception {
+    public void setPlaySound(Boolean play_sound) {
         setPredefinedKeyValue("play_sound", play_sound.toString());
     }
 
     /**
      * 通知声音，R.raw.[sound]. 如果该字段为空，采用SDK默认的声音
      */
-    public void setSound(@NotNull String sound) throws Exception {
+    public void setSound(@NotNull String sound) {
         setPredefinedKeyValue("sound", sound);
     }
 
     /**
      * 收到通知后播放指定的声音文件
      */
-    public void setPlaySound(@NotNull String sound) throws Exception {
+    public void setPlaySound(@NotNull String sound) {
         setPlaySound(true);
         setSound(sound);
     }
@@ -194,26 +194,26 @@ public abstract class AndroidNotification extends UmengNotification {
     /**
      * 点击"通知"的后续行为，默认为打开app。
      */
-    public void goAppAfterOpen() throws Exception {
+    public void goAppAfterOpen() {
         setAfterOpenAction(AfterOpenAction.go_app);
     }
 
-    public void goUrlAfterOpen(@NotNull String url) throws Exception {
+    public void goUrlAfterOpen(@NotNull String url) {
         setAfterOpenAction(AfterOpenAction.go_url);
         setUrl(url);
     }
 
-    public void goActivityAfterOpen(@NotNull String activity) throws Exception {
+    public void goActivityAfterOpen(@NotNull String activity) {
         setAfterOpenAction(AfterOpenAction.go_activity);
         setActivity(activity);
     }
 
-    public void goCustomAfterOpen(@NotNull String custom) throws Exception {
+    public void goCustomAfterOpen(@NotNull String custom) {
         setAfterOpenAction(AfterOpenAction.go_custom);
         setCustomField(custom);
     }
 
-    public void goCustomAfterOpen(JSONObject custom) throws Exception {
+    public void goCustomAfterOpen(JSONObject custom) {
         setAfterOpenAction(AfterOpenAction.go_custom);
         setCustomField(custom);
     }
@@ -221,24 +221,24 @@ public abstract class AndroidNotification extends UmengNotification {
     /**
      * 点击"通知"的后续行为，默认为打开app。原始接口
      */
-    public void setAfterOpenAction(AfterOpenAction action) throws Exception {
+    public void setAfterOpenAction(AfterOpenAction action) {
         setPredefinedKeyValue("after_open", action.toString());
     }
 
-    public void setUrl(@NotNull String url) throws Exception {
+    public void setUrl(@NotNull String url) {
         setPredefinedKeyValue("url", url);
     }
 
-    public void setActivity(@NotNull String activity) throws Exception {
+    public void setActivity(@NotNull String activity) {
         setPredefinedKeyValue("activity", activity);
     }
 
     ///can be a string of json
-    public void setCustomField(@NotNull String custom) throws Exception {
+    public void setCustomField(@NotNull String custom) {
         setPredefinedKeyValue("custom", custom);
     }
 
-    public void setCustomField(JSONObject custom) throws Exception {
+    public void setCustomField(JSONObject custom) {
         setPredefinedKeyValue("custom", custom);
     }
 

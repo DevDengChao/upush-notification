@@ -14,7 +14,7 @@ public abstract class IOSNotification extends UmengNotification {
     protected static final HashSet<String> APS_KEYS = new HashSet<>(Arrays.asList("alert", "badge", "sound", "content-available"));
 
     @Override
-    public boolean setPredefinedKeyValue(@NotNull String key, Object value) throws Exception {
+    public boolean setPredefinedKeyValue(@NotNull String key, Object value) {
         if (ROOT_KEYS.contains(key)) {
             // This key should be in the root level
             rootJson.put(key, value);
@@ -47,9 +47,9 @@ public abstract class IOSNotification extends UmengNotification {
             policyJson.put(key, value);
         } else {
             if (key.equals("payload") || key.equals("aps") || key.equals("policy")) {
-                throw new Exception("You don't need to set value for " + key + " , just set values for the sub keys in it.");
+                throw new RuntimeException("You don't need to set value for " + key + " , just set values for the sub keys in it.");
             } else {
-                throw new Exception("Unknown key: " + key);
+                throw new RuntimeException("Unknown key: " + key);
             }
         }
 
@@ -69,11 +69,11 @@ public abstract class IOSNotification extends UmengNotification {
         return true;
     }
 
-    public void setAlert(@NotNull String token) throws Exception {
+    public void setAlert(@NotNull String token) {
         setPredefinedKeyValue("alert", token);
     }
 
-    public void setAlert(@NotNull String title, @NotNull String subtitle, @NotNull String body) throws Exception {
+    public void setAlert(@NotNull String title, @NotNull String subtitle, @NotNull String body) {
         JSONObject object = new JSONObject();
         object.put("title", title);
         object.put("subtitle", subtitle);
@@ -81,15 +81,15 @@ public abstract class IOSNotification extends UmengNotification {
         setPredefinedKeyValue("alert", object);
     }
 
-    public void setBadge(Integer badge) throws Exception {
+    public void setBadge(Integer badge) {
         setPredefinedKeyValue("badge", badge);
     }
 
-    public void setSound(@NotNull String sound) throws Exception {
+    public void setSound(@NotNull String sound) {
         setPredefinedKeyValue("sound", sound);
     }
 
-    public void setContentAvailable(Integer contentAvailable) throws Exception {
+    public void setContentAvailable(Integer contentAvailable) {
         setPredefinedKeyValue("content-available", contentAvailable);
     }
 }

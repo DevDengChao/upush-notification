@@ -46,7 +46,7 @@ public abstract class UmengNotification {
      * Set predefined keys in the rootJson, for extra keys(Android) or customized keys(IOS) please
      * refer to corresponding methods in the subclass.
      */
-    public abstract boolean setPredefinedKeyValue(@NotNull String key, Object value) throws Exception;
+    public abstract boolean setPredefinedKeyValue(@NotNull String key, Object value);
 
     public String getPostBody() {
         return rootJson.toString();
@@ -60,56 +60,56 @@ public abstract class UmengNotification {
         appMasterSecret = secret;
     }
 
-    protected void setProductionMode(Boolean prod) throws Exception {
+    protected void setProductionMode(Boolean prod) {
         setPredefinedKeyValue("production_mode", prod.toString());
     }
 
     /**
      * 正式模式
      */
-    public void setProductionMode() throws Exception {
+    public void setProductionMode() {
         setProductionMode(true);
     }
 
     /**
      * 测试模式
      */
-    public void setTestMode() throws Exception {
+    public void setTestMode() {
         setProductionMode(false);
     }
 
     /**
      * 发送消息描述，建议填写。
      */
-    public void setDescription(@NotNull String description) throws Exception {
+    public void setDescription(@NotNull String description) {
         setPredefinedKeyValue("description", description);
     }
 
     /**
      * 定时发送时间，若不填写表示立即发送。格式: "YYYY-MM-DD hh:mm:ss"。
      */
-    public void setStartTime(@NotNull String startTime) throws Exception {
+    public void setStartTime(@NotNull String startTime) {
         setPredefinedKeyValue("start_time", startTime);
     }
 
     /**
      * 消息过期时间,格式: "YYYY-MM-DD hh:mm:ss"。
      */
-    public void setExpireTime(@NotNull String expireTime) throws Exception {
+    public void setExpireTime(@NotNull String expireTime) {
         setPredefinedKeyValue("expire_time", expireTime);
     }
 
     /**
      * 发送限速，每秒发送的最大条数.
      */
-    public void setMaxSendNum(Integer num) throws Exception {
+    public void setMaxSendNum(Integer num) {
         setPredefinedKeyValue("max_send_num", num);
     }
 
     /**
      * 厂商弹窗 activity
      */
-    public void setChannelActivity(@NotNull String activity) throws Exception {
+    public void setChannelActivity(@NotNull String activity) {
         setPredefinedKeyValue("mipush", "true");
         setPredefinedKeyValue("mi_activity", activity);
     }
@@ -117,7 +117,7 @@ public abstract class UmengNotification {
     /**
      * 厂商属性配置
      */
-    public void setChannelProperties(@NotNull String xiaoMiChannelId) throws Exception {
+    public void setChannelProperties(@NotNull String xiaoMiChannelId) {
         JSONObject object = new JSONObject();
         object.put("xiaomi_channel_id", xiaoMiChannelId);
         setPredefinedKeyValue("channel_properties", object);
