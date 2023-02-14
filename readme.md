@@ -10,6 +10,7 @@
 
 # Release note
 
++ 1.6.5: 使用 java-library 插件修复第三方库的依赖关系
 + 1.6.4: 更新第三方依赖版本
 + 1.6.3: 默认填充 timestamp 字段为当前时间的时间戳 (ms)
 + 1.6.2: 修复 org.json:json 库的依赖关系
