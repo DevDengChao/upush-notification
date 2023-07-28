@@ -6,6 +6,10 @@ plugins {
 group 'dev.dengchao'
 version '1.6.6'
 
+java {
+    sourceCompatibility JavaVersion.VERSION_1_8
+}
+
 repositories {
     maven { url "https://maven.aliyun.com/repository/central" }
 }
