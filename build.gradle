@@ -12,8 +12,8 @@ repositories {
 
 dependencies {
     // https://mvnrepository.com/artifact/org.jetbrains/annotations
-    implementation 'org.jetbrains:annotations:24.0.0'
+    implementation 'org.jetbrains:annotations:24.0.1'
 
     // https://mvnrepository.com/artifact/org.json/json
-    api 'org.json:json:20220924'
+    api 'org.json:json:20230618'
 }
