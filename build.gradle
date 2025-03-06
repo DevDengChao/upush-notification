@@ -19,5 +19,5 @@ dependencies {
     implementation 'org.jetbrains:annotations:24.0.1'
 
     // https://mvnrepository.com/artifact/org.json/json
-    api 'org.json:json:20230618'
+    api 'org.json:json:20250107'
 }
